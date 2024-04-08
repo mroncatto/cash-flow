@@ -1,0 +1,42 @@
+name: cashflow
+description: "CashFlow App - Developer => Marcelo Roncatto"
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get:
+  cupertino_icons: ^1.0.6
+  get_storage: ^2.1.1
+  intl: ^0.19.0
+  google_fonts: ^6.2.1
+  dio: ^5.4.2+1
+  iconly: ^1.0.1
+  lottie: ^3.1.0
+  flutter_slidable: ^3.0.0
+  marquee: ^2.2.3
+  shimmer: ^3.0.0
+  loading_animation_widget: ^1.2.0+3
+  fade_out_particle: ^1.2.1
+  animate_do: any
+  flutter_svg: any
+  smooth_page_indicator: ^1.0.0+2
+  zoom_tap_animation: ^1.1.0
+  blobs: ^2.0.0
+  switcher_button: ^0.0.4
+  cached_network_image: ^3.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/img/
+    - assets/lottie/
+    - assets/img/main.png
