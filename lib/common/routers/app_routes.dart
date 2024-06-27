@@ -1,6 +1,8 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:cashflow/features/accounts_feature/presentation/screen/new_account.dart';
+import 'package:cashflow/features/accounts_feature/presentation/account_details_locator.dart';
+import 'package:cashflow/features/accounts_feature/presentation/screen/detail_account_view.dart';
+import 'package:cashflow/features/accounts_feature/presentation/screen/new_account_view.dart';
 import 'package:cashflow/features/base_features/mainwrapper_feature/main_wrapper_locator.dart';
 import 'package:cashflow/features/base_features/mainwrapper_feature/presentation/screens/main_wrapper.dart';
 import 'package:cashflow/features/base_features/presentation/screens/introduction_view.dart';
@@ -46,15 +48,24 @@ class AppRoutes {
     ),
     GetPage(
       name: RoutesName.newAccount,
-      page: () => const NewAccount(),
+      page: () => const NewAccountView(),
       transition: transition,
     ),
-    // GetPage(
-    //   name: RoutesName.detailsScreen,
-    //   page: () => const CryptoDetailsView(),
-    //   binding: CryptoDetailsLocator(),
-    //   transition: transition,
-    // ),
+    GetPage(
+      name: RoutesName.detailAccount,
+      page: () => const DetailAccountView(),
+      binding: AccountDetailsLocator(),
+      transition: transition,
+    ),
+
+
+
+
+
+
+
+
+
     // GetPage(
     //     name: RoutesName.newsDetailsScreen,
     //     page: () => const NewsDetailsView(),

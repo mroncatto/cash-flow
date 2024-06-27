@@ -1,4 +1,5 @@
 import 'package:cashflow/features/accounts_feature/presentation/controller/accounts_controller.dart';
+import 'package:cashflow/features/accounts_feature/presentation/controller/detail_account_controller.dart';
 import 'package:cashflow/features/accounts_feature/repository/accounts_repository.dart';
 import 'package:cashflow/features/home_features/repository/home_repository.dart';
 import 'package:cashflow/features/transactions_feature/presentation/controller/transactions_controller.dart';
@@ -19,6 +20,5 @@ class MainWrapperLocator implements Bindings {
     Get.put<HomeController>(HomeController(Get.find()));
     Get.put<TransactionsController>(TransactionsController(Get.find()));
     Get.put<AccountsController>(AccountsController(Get.find()));
-    // Get.put<NewsViewController>(NewsViewController(Get.find(), Get.find()));
   }
 }

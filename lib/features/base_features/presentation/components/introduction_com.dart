@@ -26,7 +26,7 @@ class GetStartBtn extends StatelessWidget {
             color: theme.primaryColor, borderRadius: BorderRadius.circular(15)),
         child: Center(
           child: Text(
-            "Get Started now",
+            "Comece agora",
             style: GoogleFonts.ubuntu(
               fontSize: 18,
               color: Colors.white,

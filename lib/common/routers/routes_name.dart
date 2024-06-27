@@ -5,6 +5,7 @@ abstract class RoutesName {
   static const String mainWrapperScreen = '/mainWrapper_screen';
   static const String homeScreen = '/home_screen';
   static const String newAccount= '/new_account';
+  static const String detailAccount= '/detail_account';
 
 
 

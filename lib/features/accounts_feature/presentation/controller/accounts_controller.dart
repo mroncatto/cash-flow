@@ -5,8 +5,11 @@ import 'package:get/get.dart';
 class AccountsController extends GetxController with StateMixin<AccountDataList> {
   late final AccountsRepository _accountsRepository;
   AccountsController(this._accountsRepository);
-
   late AccountDataList accountsData;
+  List<String> tipos = <String>['Banco', 'Carteira', 'Crypto'];
+  List<String> moedas = <String>['Guarani - PYG', 'Dolar - USD', 'Real - BRL'];
+  late String tipoValue;
+  late String moedaValue;
 
   fetchAllAccounts() async {
     change(null, status: RxStatus.loading());
@@ -23,6 +26,10 @@ class AccountsController extends GetxController with StateMixin<AccountDataList>
     } catch (e) {
       change(null, status: RxStatus.error());
     }
+  }
+
+  fetchAccountById(accountId) async {
+    return _accountsRepository.getAccountById(accountId);
   }
 
   @override

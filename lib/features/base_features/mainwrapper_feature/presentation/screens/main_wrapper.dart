@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:iconly/iconly.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 import '../../../../../common/helper/helper.dart';
@@ -61,8 +60,8 @@ class MainWrapper extends StatelessWidget {
                           icon: mainWrapperController
                               .selectedIndexBottomNavBar.value ==
                               0
-                              ? IconlyBold.home
-                              : IconlyLight.home,
+                              ? Icons.home_outlined
+                              : Icons.home_filled,
                           page: 0,
                           context,
                           label: "Home",
@@ -71,38 +70,38 @@ class MainWrapper extends StatelessWidget {
                             icon: mainWrapperController
                                 .selectedIndexBottomNavBar.value ==
                                 1
-                                ? IconlyBold.chart
-                                : IconlyLight.chart,
+                                ? Icons.insert_chart
+                                : Icons.bar_chart,
                             page: 1,
                             context,
-                            label: "Transactions"),
+                            label: "Movimentos"),
                         _bottomAppBarItem(
                             icon: mainWrapperController
                                 .selectedIndexBottomNavBar.value ==
                                 2
-                                ? Icons.flag
+                                ? Icons.flag_outlined
                                 : Icons.flag,
                             page: 2,
                             context,
-                            label: "Budget"),
+                            label: "Orcamento"),
                         _bottomAppBarItem(
                             icon: mainWrapperController
                                 .selectedIndexBottomNavBar.value ==
                                 3
                                 ? Icons.account_balance
-                                : Icons.account_balance,
+                                : Icons.account_balance_outlined,
                             page: 3,
                             context,
-                            label: "Account"),
+                            label: "Contas"),
                         _bottomAppBarItem(
                             icon: mainWrapperController
                                 .selectedIndexBottomNavBar.value ==
                                 4
-                                ? IconlyBold.setting
-                                : IconlyLight.setting,
+                                ? Icons.settings_suggest
+                                : Icons.settings,
                             page: 4,
                             context,
-                            label: "Settings"),
+                            label: "Ajustes"),
                       ],
                     ),
                   ),

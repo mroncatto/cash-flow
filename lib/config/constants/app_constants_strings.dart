@@ -1,6 +1,6 @@
 class AppConstantsStrings {
   AppConstantsStrings._();
-  static const String splashTitle = "Cash";
+  static const String splashTitle = "CASH";
   static const String splashTitleSecond = " FLOW";
   static const String userName = "Amir👽";
   static const String appName = "CashFlow";

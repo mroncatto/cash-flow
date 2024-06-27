@@ -31,11 +31,18 @@ class AccountItem extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.all(2),
                 child: Row(children: [
-                  Icon(
-                    Icons.account_balance,
-                    color: Colors.blue,
+                  Container(
+                    width: 42,
+                    height: 42,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: HexColor(model![index].cor!)),
+                    child: Icon(
+                      model![index].toIcon(),
+                      color: Colors.white,
+                    ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,15 +62,32 @@ class AccountItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(model![index].currency!,
-                      style: theme.textTheme.displayMedium?.copyWith(color: Colors.orange)),
-                  Text( model![index].currency! != 'BTC'
-                      ? DecimalRounder.setMarketCap(model![index].saldoInicial)
-                      : DecimalRounder.removePriceDecimals(model![index].saldoInicial),
-                      style: theme.textTheme.displayMedium?.copyWith(color: Colors.green)),
+                      style: theme.textTheme.displayMedium
+                          ?.copyWith(color: Colors.orange)),
+                  Text(
+                      model![index].currency! != 'BTC'
+                          ? DecimalRounder.setMarketCap(
+                              model![index].saldoInicial)
+                          : DecimalRounder.removePriceDecimals(
+                              model![index].saldoInicial),
+                      style: theme.textTheme.displayMedium
+                          ?.copyWith(color: Colors.green)),
                 ],
               ),
             )
           ],
         ));
   }
+}
+
+class HexColor extends Color {
+  static int _getColorFromHex(String hexColor) {
+    hexColor = hexColor.toUpperCase().replaceAll("#", "");
+    if (hexColor.length == 6) {
+      hexColor = "FF" + hexColor;
+    }
+    return int.parse(hexColor, radix: 16);
+  }
+
+  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }

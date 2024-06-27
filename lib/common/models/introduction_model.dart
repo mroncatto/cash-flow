@@ -14,19 +14,19 @@ class IntroModel {
 List<IntroModel> introductionItems = [
   IntroModel(
     img: "assets/img/4.png",
-    title: "Wallet Security",
+    title: "Bem-vindo",
     subTitle:
-        "Secure online and offline wallets\nwith our advance technology",
+        "Gerencie despesas, orçamentos e metas \nem um só lugar",
   ),
   IntroModel(
     img: "assets/img/3.png",
-    title: "Real-Time Graphs",
+    title: "Orçamentos",
     subTitle:
-        "Get the real-time graphs with\nmarket history and info",
+        "Crie orçamentos, receba alertas e \ncontrole seus gastos com facilidade",
   ),
   IntroModel(
     img: "assets/img/1.png",
-    title: "Financial Advises",
-    subTitle: "Take professional financial advises\nfrom professionals anytime",
+    title: "Investimentos",
+    subTitle: "Acompanhe investimentos, receba sugestões \ne simule cenários para seu futuro financeiro",
   ),
 ];

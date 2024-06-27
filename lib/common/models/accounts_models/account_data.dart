@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class AccountData {
   AccountData(
       {int? id,
@@ -21,6 +23,7 @@ class AccountData {
   String? _currency;
   double? _saldoInicial;
 
+  int? get id => _id;
   String? get descricao => _descricao;
   String? get tipo => _tipo;
   String? get cor => _cor;
@@ -45,6 +48,32 @@ class AccountData {
     map['currency'] = _currency;
     map['saldoInicial'] = _saldoInicial;
     return map;
+  }
+
+  IconData toIcon() {
+    final map = <String, dynamic>{};
+    map['bank'] = Icons.account_balance;
+    map['wallet'] = Icons.wallet;
+    map['crypto'] = Icons.currency_bitcoin;
+
+    if (map.containsKey(_tipo)) {
+      return map[_tipo];
+    }
+
+    return Icons.account_balance;
+  }
+
+  String? toType() {
+    final map = <String, String>{};
+    map['bank'] = "Banco";
+    map['wallet'] = "Carteira";
+    map['crypto'] = "Crypto";
+
+    if (map.containsKey(_tipo)) {
+      return map[_tipo];
+    }
+
+    return "Banco";
   }
 
 }

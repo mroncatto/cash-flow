@@ -15,7 +15,7 @@ class SettingsView extends StatelessWidget {
 
     return Scaffold(
       appBar: const CustomAppBar(
-        title: "Settings",
+        title: "Ajustes",
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
@@ -46,7 +46,7 @@ class SettingsView extends StatelessWidget {
               ),
               ListTile(
                 leading: Text(
-                  "Theme Mode",
+                  "Dark Mode",
                   style: theme.textTheme.displayLarge?.copyWith(
                     fontSize: 15,
                   ),

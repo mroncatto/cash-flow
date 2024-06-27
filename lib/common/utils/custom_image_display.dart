@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:iconly/iconly.dart';
 
 class CustomImageDisplay {
   CustomImageDisplay._();
@@ -19,7 +19,7 @@ class CustomImageDisplay {
       fit: fit,
       imageUrl: imageUrl,
       errorWidget: (context, url, error) {
-        return const Icon(IconlyBroken.info_circle);
+        return const Icon(Icons.info);
       },
       placeholder: (context, url) => placeholder ?? Container(),
     );
