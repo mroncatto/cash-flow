@@ -1,23 +1,35 @@
 import 'package:cashflow/common/common.dart';
-import 'package:cashflow/common/models/accounts_models/account_data.dart';
+import 'package:cashflow/common/models/cuenta_models/cuenta_model.dart';
 import 'package:cashflow/common/widgets/account_item.dart';
 import 'package:cashflow/common/widgets/custom_appbar.dart';
 import 'package:cashflow/common/widgets/empty_states/offline_user_state.dart';
 import 'package:cashflow/common/widgets/shimmers/accounts_shimmer.dart';
 import 'package:cashflow/features/accounts_feature/presentation/controller/accounts_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../../common/widgets/empty_states/empty_result_state.dart';
 
 class AccountsView extends GetView<AccountsController> {
   const AccountsView({super.key});
 
   void _abrirNovaConta() {
-    Get.offNamedUntil(RoutesName.newAccount, (route) => route.isFirst);
+    Get.offNamedUntil(RoutesName.newAccount, (route) => route.isFirst)
+        ?.then((value) {
+      if (value != null && value) {
+        controller.fetchAllAccounts();
+      }
+    });
   }
 
   void _abrirDetalheConta(accountId) {
-    Get.toNamed(RoutesName.detailAccount, arguments: [accountId, controller.fetchAccountById(accountId)]);
+    Get.toNamed(RoutesName.detailAccount,
+            arguments: [accountId, controller.fetchAccountById(accountId)])
+        ?.then((value) {
+      if (value != null && value) {
+        controller.fetchAllAccounts();
+      }
+    });
   }
 
   @override
@@ -28,7 +40,7 @@ class AccountsView extends GetView<AccountsController> {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: const CustomAppBar(
-        title: "Contas",
+        title: "Cuentas",
       ),
       body: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
@@ -43,8 +55,8 @@ class AccountsView extends GetView<AccountsController> {
                   fit: FlexFit.tight,
                   child: controller.obx(
                     (state) {
-                      List<AccountData>? model =
-                          controller.accountsData.data!.accountDataList;
+                      List<CuentaModel>? model =
+                          controller.cuentaDataList.data!.cuentaList;
                       return RefreshIndicator(
                           color: theme.primaryColor,
                           backgroundColor: theme.cardColor,
@@ -54,11 +66,11 @@ class AccountsView extends GetView<AccountsController> {
                           child: ListView.builder(
                               physics: const AlwaysScrollableScrollPhysics(),
                               primary: false,
-                              itemCount: model!.length,
+                              itemCount: model?.length,
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                     onTap: () {
-                                      _abrirDetalheConta(model[index].id);
+                                      _abrirDetalheConta(model?[index].id);
                                     },
                                     child: AccountItem(
                                       index: index,
@@ -71,6 +83,8 @@ class AccountsView extends GetView<AccountsController> {
                           controller.fetchAllAccounts();
                         },
                         mainAxisAlignment: MainAxisAlignment.center),
+                    onEmpty: const EmptyResultState(
+                        msg: "No hay cuentas registradas!"),
                     onLoading: const ShimmerLoadingAccounts(),
                   ),
                 )

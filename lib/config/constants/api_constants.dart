@@ -2,9 +2,10 @@ class ApiConstants {
   ApiConstants._();
 
   // All Transactions
-  static const String allTransactionsApi = "http://10.0.2.2:3000/cashflow/transactions";
-  static const String testeApi = "http://10.0.2.2:3000/cashflow/teste";
-  static const String AllAccountsApi = "http://10.0.2.2:3000/cashflow/contas";
+  static const String allTransactionsApi =
+      "http://10.0.2.2:3000/cashflow/transactions";
+  static const String allMonedasApi = "http://10.0.2.2:3000/cashflow/monedas";
+  static const String cuentasApi = "http://10.0.2.2:3000/cashflow/contas";
   static const String accountsByIdApi = "http://10.0.2.2:3000/cashflow/contas";
 
   /// All Market cap Data

@@ -1,15 +1,13 @@
-import 'package:cashflow/common/models/accounts_models/account_data.dart';
+import 'package:cashflow/common/models/cuenta_models/cuenta_model.dart';
 import 'package:cashflow/common/widgets/empty_states/offline_user_state.dart';
-import 'package:cashflow/common/widgets/shimmers/accounts_shimmer.dart';
 import 'package:cashflow/features/accounts_feature/presentation/components/details_item_info.dart';
-import 'package:cashflow/features/accounts_feature/presentation/controller/detail_account_controller.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cashflow/features/accounts_feature/presentation/controller/account_view_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../common/common.dart';
 
-class DetailAccountView extends GetView<DetailAccountController> {
+class DetailAccountView extends GetView<AccountViewController> {
   const DetailAccountView({super.key});
 
   @override
@@ -21,7 +19,19 @@ class DetailAccountView extends GetView<DetailAccountController> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Detalhes da conta", style: theme.textTheme.displaySmall),
+        title:
+            Text("Detalles de la cuenta", style: theme.textTheme.displaySmall),
+        actions: [
+          PopupMenuButton<int>(
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                  onTap: () async {
+                    await controller.arquivarCuenta();
+                  },
+                  child: const Text("Arquivar Cuenta")),
+            ],
+          )
+        ],
       ),
       body: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
@@ -36,13 +46,13 @@ class DetailAccountView extends GetView<DetailAccountController> {
                   fit: FlexFit.tight,
                   child: controller.obx(
                     (state) {
-                      AccountData? model = controller.account;
+                      CuentaModel? model = controller.cuenta;
                       return RefreshIndicator(
                           color: theme.primaryColor,
                           backgroundColor: theme.cardColor,
                           onRefresh: () {
                             return controller
-                                .fetchAccountById(Get.arguments[0]);
+                                .buscarContaPorId(Get.arguments[0]);
                           },
                           child: SingleChildScrollView(
                             physics: const AlwaysScrollableScrollPhysics(),
@@ -53,7 +63,7 @@ class DetailAccountView extends GetView<DetailAccountController> {
                                   margin:
                                       EdgeInsets.only(top: size.height * 0.01),
                                   width: size.width,
-                                  height: size.height * 0.38,
+                                  height: size.height * 0.32,
                                   decoration: BoxDecoration(
                                     color: theme.primaryColor,
                                     borderRadius: BorderRadius.circular(25),
@@ -74,37 +84,64 @@ class DetailAccountView extends GetView<DetailAccountController> {
                                             children: [
                                               /// Mount change
                                               Row(
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
                                                   Container(
-                                                    padding: const EdgeInsets.only(top: 10),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 10),
                                                     child: GestureDetector(
                                                       onTap: () => {},
-                                                      child: const Icon(Icons.keyboard_arrow_left, color: Colors.white, size: 30),
+                                                      child: const Icon(
+                                                          Icons
+                                                              .keyboard_arrow_left,
+                                                          color: Colors.white,
+                                                          size: 30),
                                                     ),
                                                   ),
                                                   Container(
-                                                    padding: const EdgeInsets.only(top: 10),
-                                                    margin: const EdgeInsets.fromLTRB(30, 5, 40, 5),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 10),
+                                                    margin: const EdgeInsets
+                                                        .fromLTRB(30, 5, 40, 5),
                                                     child: GestureDetector(
                                                       onTap: () => {},
-                                                      child: Text(FormatHelper.getMonthName(monthNumber: _selected.month),
-                                                          style: GoogleFonts.baiJamjuree(
-                                                              color: Colors.white,
-                                                              fontWeight: FontWeight.bold,
-                                                              fontSize: 16)),
+                                                      child: Text(
+                                                          FormatHelper
+                                                              .getMonthName(
+                                                                  monthNumber:
+                                                                      _selected
+                                                                          .month),
+                                                          style: GoogleFonts
+                                                              .baiJamjuree(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontSize:
+                                                                      16)),
                                                     ),
                                                   ),
                                                   Container(
-                                                    padding: const EdgeInsets.only(top: 10),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 10),
                                                     child: GestureDetector(
                                                       onTap: () => {},
-                                                      child: const Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30),
+                                                      child: const Icon(
+                                                          Icons
+                                                              .keyboard_arrow_right,
+                                                          color: Colors.white,
+                                                          size: 30),
                                                     ),
                                                   ),
                                                   //GestureDetector(),
                                                 ],
                                               ),
+
                                               /// Top title description
                                               Padding(
                                                 padding: EdgeInsets.only(
@@ -118,14 +155,14 @@ class DetailAccountView extends GetView<DetailAccountController> {
                                                       CrossAxisAlignment.center,
                                                   children: [
                                                     Text(
-                                                      model.descricao!,
+                                                      model.descripcion,
                                                       style: GoogleFonts.ubuntu(
                                                         color: Colors.white,
                                                         fontSize: 20,
                                                       ),
                                                     ),
                                                     Text(
-                                                      " / ${model.currency!}",
+                                                      " / ${model.moneda.codigo}",
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: GoogleFonts.ubuntu(
@@ -169,8 +206,8 @@ class DetailAccountView extends GetView<DetailAccountController> {
                                                         ),
                                                         Text(
                                                           DecimalRounder
-                                                              .setMarketCap(model
-                                                                  .saldoInicial),
+                                                              .setMarketCap(
+                                                                  model.saldo),
                                                           style: GoogleFonts
                                                               .ubuntu(
                                                                   color: Colors
@@ -183,15 +220,15 @@ class DetailAccountView extends GetView<DetailAccountController> {
                                                       ])),
 
                                               /// Ajusta saldo Button
-                                              Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom:
-                                                          size.height * 0.001),
-                                                  child: ElevatedButton(
-                                                    child:
-                                                        Text("Ajustar Saldo"),
-                                                    onPressed: () {},
-                                                  )),
+                                              // Padding(
+                                              //     padding: EdgeInsets.only(
+                                              //         bottom:
+                                              //             size.height * 0.001),
+                                              //     child: ElevatedButton(
+                                              //       child:
+                                              //           Text("Ajustar Saldo"),
+                                              //       onPressed: () {},
+                                              //     )),
 
                                               /// Detalhes
                                               Padding(
@@ -228,7 +265,9 @@ class DetailAccountView extends GetView<DetailAccountController> {
                                                 padding: EdgeInsets.only(
                                                     top: size.height * 0.01),
                                                 child: Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
                                                   children: [
                                                     Column(
                                                       children: [
@@ -250,7 +289,7 @@ class DetailAccountView extends GetView<DetailAccountController> {
                                                                         .start,
                                                                 children: [
                                                                   Text(
-                                                                    "Tipo da Conta",
+                                                                    "Tipo",
                                                                     style: GoogleFonts.ubuntu(
                                                                         color: const Color
                                                                             .fromARGB(
@@ -264,7 +303,8 @@ class DetailAccountView extends GetView<DetailAccountController> {
                                                                             FontWeight.w400),
                                                                   ),
                                                                   Text(
-                                                                    model.toType()!,
+                                                                    model
+                                                                        .toType()!,
                                                                     style: GoogleFonts
                                                                         .ubuntu(
                                                                       color: Colors
@@ -285,9 +325,9 @@ class DetailAccountView extends GetView<DetailAccountController> {
                                                         Padding(
                                                           padding: EdgeInsets
                                                               .symmetric(
-                                                              vertical: 10,
-                                                              horizontal:
-                                                              2),
+                                                                  vertical: 10,
+                                                                  horizontal:
+                                                                      2),
                                                           child: Row(
                                                             children: [
                                                               Icon(Icons
@@ -296,11 +336,11 @@ class DetailAccountView extends GetView<DetailAccountController> {
                                                                   width: 5),
                                                               Column(
                                                                 crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
+                                                                    CrossAxisAlignment
+                                                                        .start,
                                                                 children: [
                                                                   Text(
-                                                                    "Valor Inicial",
+                                                                    "Moneda",
                                                                     style: GoogleFonts.ubuntu(
                                                                         color: const Color
                                                                             .fromARGB(
@@ -309,18 +349,19 @@ class DetailAccountView extends GetView<DetailAccountController> {
                                                                             255,
                                                                             255),
                                                                         fontSize:
-                                                                        13,
+                                                                            13,
                                                                         fontWeight:
-                                                                        FontWeight.w400),
+                                                                            FontWeight.w400),
                                                                   ),
                                                                   Text(
-                                                                    DecimalRounder.setMarketCap(model.saldoInicial)!,
+                                                                    model.moneda
+                                                                        .nombre,
                                                                     style: GoogleFonts
                                                                         .ubuntu(
                                                                       color: Colors
                                                                           .white,
                                                                       fontSize:
-                                                                      15,
+                                                                          15,
                                                                     ),
                                                                   )
                                                                 ],
@@ -346,7 +387,7 @@ class DetailAccountView extends GetView<DetailAccountController> {
                     },
                     onError: (error) => OfflineUserState(
                         onPressed: () {
-                          controller.fetchAccountById(Get.arguments[0]);
+                          controller.buscarContaPorId(Get.arguments[0]);
                         },
                         mainAxisAlignment: MainAxisAlignment.center),
                   ),
@@ -357,7 +398,9 @@ class DetailAccountView extends GetView<DetailAccountController> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () async {
+          controller.alterarCuenta();
+        },
         child: const Icon(Icons.edit),
       ),
     );

@@ -1,25 +1,25 @@
-import 'package:cashflow/common/models/accounts_models/account_data_list.dart';
-import 'package:cashflow/features/accounts_feature/repository/accounts_repository.dart';
+import 'package:cashflow/common/models/cuenta_models/cuenta_data_list.dart';
+import 'package:cashflow/features/accounts_feature/repository/cuentas_repository.dart';
 import 'package:get/get.dart';
 
-class AccountsController extends GetxController with StateMixin<AccountDataList> {
-  late final AccountsRepository _accountsRepository;
-  AccountsController(this._accountsRepository);
-  late AccountDataList accountsData;
-  List<String> tipos = <String>['Banco', 'Carteira', 'Crypto'];
-  List<String> moedas = <String>['Guarani - PYG', 'Dolar - USD', 'Real - BRL'];
+class AccountsController extends GetxController
+    with StateMixin<CuentaDataList> {
+  late final CuentasRepository _cuentasRepository;
+  AccountsController(this._cuentasRepository);
+  late CuentaDataList cuentaDataList;
+
   late String tipoValue;
   late String moedaValue;
 
   fetchAllAccounts() async {
     change(null, status: RxStatus.loading());
     try {
-      var response = await _accountsRepository.getAllAcounts();
+      var response = await _cuentasRepository.getAllCuentas();
 
       if (response.statusCode == 200) {
-        accountsData = AccountDataList.fromJson(response.data);
+        cuentaDataList = CuentaDataList.fromMap(response.data);
 
-        change(accountsData, status: RxStatus.success());
+        change(cuentaDataList, status: RxStatus.success());
       } else {
         change(null, status: RxStatus.error());
       }
@@ -29,7 +29,7 @@ class AccountsController extends GetxController with StateMixin<AccountDataList>
   }
 
   fetchAccountById(accountId) async {
-    return _accountsRepository.getAccountById(accountId);
+    //return _accountsRepository.getAccountById(accountId);
   }
 
   @override
@@ -37,6 +37,4 @@ class AccountsController extends GetxController with StateMixin<AccountDataList>
     fetchAllAccounts();
     super.onInit();
   }
-
-
 }

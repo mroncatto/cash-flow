@@ -1,5 +1,5 @@
 import 'package:cashflow/common/helper/decimal_rounder.dart';
-import 'package:cashflow/common/models/accounts_models/account_data.dart';
+import 'package:cashflow/common/models/cuenta_models/cuenta_model.dart';
 import 'package:flutter/material.dart';
 import '../../common/common.dart';
 
@@ -10,7 +10,7 @@ class AccountItem extends StatelessWidget {
     required this.index,
   });
 
-  final List<AccountData>? model;
+  final List<CuentaModel>? model;
   final int index;
 
   @override
@@ -36,7 +36,7 @@ class AccountItem extends StatelessWidget {
                     height: 42,
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: HexColor(model![index].cor!)),
+                        color: HexColor(model![index].color)),
                     child: Icon(
                       model![index].toIcon(),
                       color: Colors.white,
@@ -47,10 +47,10 @@ class AccountItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(model![index].descricao!,
+                      Text(model![index].descripcion,
                           style: theme.textTheme.displaySmall),
                       const SizedBox(height: 1),
-                      Text("Saldo Disponivel",
+                      Text("Saldo de la cuenta",
                           style: theme.textTheme.displayMedium),
                     ],
                   ),
@@ -61,15 +61,10 @@ class AccountItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(model![index].currency!,
+                  Text(model![index].moneda.codigo,
                       style: theme.textTheme.displayMedium
                           ?.copyWith(color: Colors.orange)),
-                  Text(
-                      model![index].currency! != 'BTC'
-                          ? DecimalRounder.setMarketCap(
-                              model![index].saldoInicial)
-                          : DecimalRounder.removePriceDecimals(
-                              model![index].saldoInicial),
+                  Text(DecimalRounder.setMarketCap(model![index].saldo),
                       style: theme.textTheme.displayMedium
                           ?.copyWith(color: Colors.green)),
                 ],
@@ -84,7 +79,7 @@ class HexColor extends Color {
   static int _getColorFromHex(String hexColor) {
     hexColor = hexColor.toUpperCase().replaceAll("#", "");
     if (hexColor.length == 6) {
-      hexColor = "FF" + hexColor;
+      hexColor = "FF$hexColor";
     }
     return int.parse(hexColor, radix: 16);
   }

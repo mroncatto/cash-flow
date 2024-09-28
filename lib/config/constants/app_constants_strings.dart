@@ -2,12 +2,12 @@ class AppConstantsStrings {
   AppConstantsStrings._();
   static const String splashTitle = "CASH";
   static const String splashTitleSecond = " FLOW";
-  static const String userName = "Amir👽";
+  static const String userName = "Marcelo 👽";
   static const String appName = "CashFlow";
   static const String livePriceText = "Live Prices";
   static const String viewAll = "View All";
   static const String internetConnectionProblem1 =
-      "There's a problem with your connection!";
+      "¡Hay un problema con tu conexión!";
   static const String internetConnectionProblem2 =
       "Please check your internet connection and then try again.";
   static const String searchBoxText = "e.g.Bitcoin, Ethereum";

@@ -7,11 +7,10 @@ class AccountsRepository {
   AccountsRepository(this._apiProvider);
 
   Future<dynamic> getAllAcounts() async {
-    return await _apiProvider.get(ApiConstants.AllAccountsApi);
+    return await _apiProvider.get(ApiConstants.cuentasApi);
   }
 
   Future<dynamic> getAccountById(accountId) async {
     return await _apiProvider.get("${ApiConstants.accountsByIdApi}/$accountId");
   }
-
 }

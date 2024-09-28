@@ -36,13 +36,13 @@ class AccountData {
     _tipo = json['tipo'];
     _cor = json['cor'];
     _currency = json['currency'];
-    _saldoInicial = json['saldoInicial'];
+    _saldoInicial = json['saldoInicial'].toDouble();
   }
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = _id;
-    map['descricaao'] = _descricao;
+    map['descricao'] = _descricao;
     map['tipo'] = _tipo;
     map['cor'] = _cor;
     map['currency'] = _currency;

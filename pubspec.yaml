@@ -9,29 +9,31 @@ dependencies:
   flutter:
     sdk: flutter
   get:
-  cupertino_icons: ^1.0.6
-  get_storage: ^2.1.1
-  intl: ^0.19.0
-  google_fonts: ^6.2.1
-  dio: ^5.4.2+1
-  lottie: ^3.1.0
-  flutter_slidable: ^3.0.0
-  marquee: ^2.2.3
-  shimmer: ^3.0.0
-  loading_animation_widget: ^1.2.0+3
-  fade_out_particle: ^1.2.1
-  animate_do: any
-  flutter_svg: any
-  smooth_page_indicator: ^1.0.0+2
-  zoom_tap_animation: ^1.1.0
-  blobs: ^2.0.0
-  switcher_button: ^0.0.4
-  cached_network_image: ^3.2.1
+  cupertino_icons: ^1.0.8
+  get_storage: ^2.1.1 # solução leve e fácil de usar para armazenamento local de dados
+  intl: ^0.19.0 # Pacote para internacionalização, oferecendo suporte a formatação de datas, números e mensagens em diferentes idiomas
+  google_fonts: ^6.2.1 # Permite usar fontes do Google Fonts facilmente
+  dio: ^5.7.0 # Um cliente HTTP muito popular para Flutter
+  lottie: ^3.1.2 # Permite a exibição de animações Lottie, que são animações vetoriais criadas com o Adobe After Effects
+  flutter_slidable: ^3.1.1 # Um widget que permite criar listas deslizantes, onde os itens podem ser deslizados para revelar ações adicionais
+  marquee: ^2.2.3  # Um widget que cria um efeito de texto em movimento, como um letreiro,
+  shimmer: ^3.0.0 # Adiciona um efeito de brilho a elementos da interface
+  loading_animation_widget: ^1.2.0+3 # Oferece uma variedade de animações de carregamento que podem ser facilmente integradas na interface
+  fade_out_particle: ^1.2.1 # Um pacote para criar animações de partículas que desaparecem
+  animate_do: any # Um pacote que facilita a adição de animações aos widgets
+  flutter_svg: any # Permite a renderização de imagens SVG (Scalable Vector Graphics), que são escaláveis
+  smooth_page_indicator: ^1.2.0+3 # Um widget que fornece um indicador de página suave
+  zoom_tap_animation: ^1.1.0 # Permite adicionar animações de zoom e toque a widgets
+  blobs: ^2.0.0 # Um pacote que permite a criação de formas blob personalizadas e animadas
+  switcher_button: ^0.0.4 # Um botão personalizável que pode alternar entre estados, ideal para funcionalidades como liga/desliga.
+  cached_network_image: ^3.4.1 # Facilita o carregamento e armazenamento em cache de imagens da rede
+  sqflite: ^2.0.0+3 # Acesso ao banco de dados interno sqlite
+  path: ^1.8.0  # Para facilitar a manipulação de caminhos
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
 
 flutter:
   uses-material-design: true

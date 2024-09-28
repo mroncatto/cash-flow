@@ -1,4 +1,4 @@
-import 'package:cashflow/common/models/accounts_models/account_data.dart';
+import 'package:cashflow/common/models/cuenta_models/account_data.dart';
 
 class AccountDataList {
   AccountDataList({Data? data}) {
@@ -23,8 +23,7 @@ class AccountDataList {
 }
 
 class Data {
-  Data({
-    List<AccountData>? accountDataList, String? totalCount}) {
+  Data({List<AccountData>? accountDataList, String? totalCount}) {
     _accountDataList = accountDataList;
     _totalCount = totalCount;
   }
@@ -51,11 +50,10 @@ class Data {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    if(_accountDataList != null) {
+    if (_accountDataList != null) {
       map['accountList'] = _accountDataList?.map((v) => v.toJson()).toList();
     }
     map['totalCount'] = _totalCount;
     return map;
   }
-
 }

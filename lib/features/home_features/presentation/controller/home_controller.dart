@@ -10,7 +10,7 @@ class HomeController extends GetxController {
   late AllTransactionModel cryptoData;
   RxInt currentChoiceIndex = 0.obs;
   DateTime now = DateTime.now();
-  DateFormat formatter = DateFormat('MMMM d EEEE yyyy');
+  DateFormat formatter = DateFormat('EEEE, MMMM d');
   late String formatted;
 
   /// Fetching All Data Method for Top 10 Trending in market
